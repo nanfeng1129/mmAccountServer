@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements IUserService {
     @Override
     public Boolean login(String username, String password){
-        System.out.println("会执行到这里来吗？？？？");
         return "lijw".equals(username) && "123456".equals(password);
     }
 }
