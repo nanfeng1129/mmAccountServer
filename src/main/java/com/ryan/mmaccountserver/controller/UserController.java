@@ -1,30 +1,38 @@
 package com.ryan.mmaccountserver.controller;
 
 
+import com.ryan.mmaccountserver.pojo.User;
+import com.ryan.mmaccountserver.respbody.RespResult;
+import com.ryan.mmaccountserver.respbody.ResultCode;
 import com.ryan.mmaccountserver.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("user")
 public class UserController {
 
-    @Resource
+    @Autowired
     IUserService userService;
 
 
     /**
      * @descript 登录方法
-     * @param username 用户名
-     * @param password 密码
+     * @param user
      * @return 检验是否通过
      */
-    @RequestMapping("login")
-    public Boolean login(String username, String password){
-        return userService.login(username, password);
+    @PostMapping("login")
+    public Object login(@RequestBody User user){
+        if(userService.login(user.getUsername(), user.getPassword())){
+            return "登录成功";
+        }else{
+            return RespResult.fail(ResultCode.FAILURE.code(), "账号或密码错误");
+//            return "账号或密码错误";
+        }
     }
 }
