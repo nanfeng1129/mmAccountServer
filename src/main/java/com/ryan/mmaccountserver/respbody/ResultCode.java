@@ -9,7 +9,7 @@ public enum ResultCode {
 
      /* 系统500错误*/
      SYSTEM_ERROR(10000, "系统异常，请稍后重试"),
-     UNAUTHORIZED(10401, "签名验证失败"),
+     UNAUTHORIZED(10401, "登录已过期"),
 
      /* 参数错误：10001-19999 */
      PARAM_IS_INVALID(10001, "参数无效"),

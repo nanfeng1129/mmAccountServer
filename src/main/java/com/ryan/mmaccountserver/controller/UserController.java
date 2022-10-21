@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,12 +29,16 @@ public class UserController {
      * @return 检验是否通过
      */
     @PostMapping("login")
-    public Object login(@RequestBody User user){
+    public Object login(@RequestBody User user, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        System.out.println("---session----" + session);
+
         if(userService.login(user.getUsername(), user.getPassword())){
+            session.setAttribute("demo", "1111");
+            System.out.println(session.getAttribute("demo"));
             return "登录成功";
         }else{
             return RespResult.fail(ResultCode.FAILURE.code(), "账号或密码错误");
-//            return "账号或密码错误";
         }
     }
 }
