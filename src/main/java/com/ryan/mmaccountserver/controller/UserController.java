@@ -35,10 +35,24 @@ public class UserController {
 
         if(userService.login(user.getUsername(), user.getPassword())){
             session.setAttribute("demo", "1111");
+            session.setMaxInactiveInterval(2 * 60 * 60);
             System.out.println(session.getAttribute("demo"));
-            return "登录成功";
+            System.out.println(session.getId());
+            return session.getId();
         }else{
             return RespResult.fail(ResultCode.FAILURE.code(), "账号或密码错误");
         }
+    }
+    @PostMapping("logout")
+    public Object logout(HttpServletRequest request){
+        request.getSession().invalidate();
+
+        return "退出登录成功";
+    }
+    @PostMapping("logout2")
+    public Object logout2(HttpServletRequest request){
+//        request.getSession().invalidate();
+
+        return "测试session过期";
     }
 }
