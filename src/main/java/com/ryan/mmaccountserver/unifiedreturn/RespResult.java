@@ -1,10 +1,8 @@
-package com.ryan.mmaccountserver.respbody;
+package com.ryan.mmaccountserver.unifiedreturn;
 
-import com.ryan.mmaccountserver.service.IUserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @AllArgsConstructor
 @NoArgsConstructor

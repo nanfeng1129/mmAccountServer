@@ -1,4 +1,4 @@
-package com.ryan.mmaccountserver.respbody;
+package com.ryan.mmaccountserver.unifiedreturn;
 
 public enum ResultCode {
      /* 成功状态码 */
@@ -29,5 +29,21 @@ public enum ResultCode {
      }
      public String message() {
          return this.message;
+     }
+     public static int findCodeByMsg(String msg) {
+          for (ResultCode eachEnum :ResultCode.values()) {
+               if (eachEnum.message() == msg) {
+                    return eachEnum.code();
+               }
+          }
+          return -1;
+     }
+     public static String findMsgByCode(int code) {
+          for (ResultCode eachEnum :ResultCode.values()) {
+               if (eachEnum.code() == code) {
+                    return eachEnum.message();
+               }
+          }
+          return "调用失败";
      }
 }
